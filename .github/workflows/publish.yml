@@ -1,0 +1,15 @@
+name: Publish and Deploy Documentation
+# When a new Github Release is created via our npm script, publish to NPM and then deploy our storybook documentation to github pages
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-and-deploy-documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.release.tag_name }}
+      - name: Checkout Package
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.event.release.tag_name }}
